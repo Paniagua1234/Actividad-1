@@ -1,0 +1,46 @@
+CREATE DATABASE Actividad1;
+
+USE Actividad1;
+
+CREATE TABLE Empleados(
+	id_empleado INT AUTO_INCREMENT PRIMARY KEY,
+	nombre_empleado VARCHAR(50),
+	apellido_empleado VARCHAR(50),
+	cargo_empleado VARCHAR(25),
+	salario_empleado DOUBLE(10,2),
+	fecha_inicio_empleado date
+);
+
+CREATE TABLE Departamentos(
+	id_departamento INT AUTO_INCREMENT PRIMARY KEY,
+	nombre_departamento VARCHAR(50)
+);
+
+CREATE TABLE Proyectos(
+	id_proyecto INT AUTO_INCREMENT PRIMARY KEY,
+	nombre_proyecto VARCHAR(50)
+);
+
+CREATE TABLE Detalles_departamento(
+	id_empleado INT,
+	CONSTRAINT fk_empleado_detalles_departamento
+	FOREIGN KEY (id_empleado)
+	REFERENCES Empleados(id_empleado),
+	id_departamento INT,
+	CONSTRAINT fk_departamento_detalles_empleado
+	FOREIGN KEY (id_departamento)
+	REFERENCES Departamentos(id_departamento),
+	asignaciones_empleado VARCHAR(200)
+);
+
+CREATE TABLE Detalles_proyecto(
+	id_empleado INT,
+	CONSTRAINT fk_empleado_detalles
+	FOREIGN KEY (id_empleado)
+	REFERENCES Empleados(id_empleado),
+	id_proyecto INT,
+	CONSTRAINT fk_departamento_detalles
+	FOREIGN KEY (id_proyecto)
+	REFERENCES Departamentos(id_proyecto),
+	asignaciones_empleado VARCHAR(200)
+);
